@@ -12,33 +12,33 @@ chrome.storage.sync.get(['hidden', 'query'], function(result) {
     var listings = document.querySelectorAll('[data-listing-id]');
 
     listings.forEach(listing => {
-        var remove = false;
-        var id = listing.getAttribute("data-listing-id");
-        if(hidden.includes(id)) {
-            remove = true;
-        }
-        var titles = listing.getElementsByClassName("title");
-        for (var i = 0; i < titles.length; i++) {
-            if (ignoredWords.some(ignoredWord => titles[i].innerText.toLowerCase().includes(ignoredWord))) {
-                remove = true;
-            }
-        }
-        var descriptions = listing.getElementsByClassName("description");
-        for (var i = 0; i < descriptions.length; i++) {
-            if (ignoredWords.some(ignoredWord => descriptions[i].innerText.toLowerCase().includes(ignoredWord))) {
-                remove = true;
-            } else {
-                addButton(descriptions[i], id);
-            }
-        }
-        if (remove) {
+        if (filterListing(listing, ignoredWords)) {
             listing.parentElement.removeChild(listing);
         }
     })
 });
 
-function populateHideButtons() {
-    
+function filterListing(listing, ignoredWords) {
+    var remove = false;
+    var id = listing.getAttribute("data-listing-id");
+    if(hidden.includes(id)) {
+        remove = true;
+    }
+    var titles = listing.getElementsByClassName("title");
+    for (var i = 0; i < titles.length; i++) {
+        if (ignoredWords.some(ignoredWord => titles[i].innerText.toLowerCase().includes(ignoredWord))) {
+            remove = true;
+        }
+    }
+    var descriptions = listing.getElementsByClassName("description");
+    for (var i = 0; i < descriptions.length; i++) {
+        if (ignoredWords.some(ignoredWord => descriptions[i].innerText.toLowerCase().includes(ignoredWord))) {
+            remove = true;
+        } else {
+            addButton(descriptions[i], id);
+        }
+    }
+    return remove
 }
 
 function addButton(element) {
