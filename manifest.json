@@ -1,0 +1,16 @@
+{
+    "name": "Kijiji Buddy",
+    "version": "1.0",
+    "description": "Your buddy in Kijiji searches!",
+    "permissions": ["https://*.kijiji.ca/", "storage"],
+    "content_scripts": [
+      {
+        "matches": ["https://*.kijiji.ca/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "browser_action": {
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 2
+  }
