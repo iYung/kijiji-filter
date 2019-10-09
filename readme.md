@@ -6,9 +6,9 @@ Kijiji Filter is a chrome extension that filters out results according to its ow
 
 Kijiji searches are now powered by the Kijiji Query Language! Currently it does 3 things:
 
--Specify words to include
--Specify words to exclude
--Specify listing attributes to be a specific value
+* Specify words to include
+* Specify words to exclude
+* Specify listing attributes to be a specific value
 
 To specify words to include, just type the word in normally! For example, this would specify dogs:
 ```
