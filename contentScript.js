@@ -7,8 +7,9 @@ var cloneBar = copySearchBar(searchBar);
 
 chrome.storage.sync.get(['hidden', 'query'], function(result) {
     cloneBar.value = result.query ? result.query : "";
-    result.hidden.split("~").forEach(elem => hidden.push(elem));
-
+    if (result.hidden) {
+        result.hidden.split("~").forEach(elem => hidden.push(elem));
+    }
     var ignoredWords = result.query ? getIgnoredWords(result.query) : [];
     var attributes = result.query ? getAttributes(result.query) : [];
     var listings = document.querySelectorAll('[data-listing-id]');
